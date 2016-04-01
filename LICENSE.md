@@ -1,4 +1,4 @@
-Kiwoom-Plus
+Kiwoom-Helper
 
 Copyright (c) 2016 sculove.
 
