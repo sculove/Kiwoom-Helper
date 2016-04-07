@@ -230,7 +230,7 @@ class KiwoomHelper {
 			case 3:
 				if(!isNaN(arguments[1]) && isNaN(arguments[2])) {
 					// trans 데이터
-			fi		// get(“OPT00001”, 0, “현재가”);
+					// get(“OPT00001”, 0, “현재가”);
 					return kiwoom.commGetData(arguments[0], "", ...arguments);
 				} else {
 					// real 데이터
