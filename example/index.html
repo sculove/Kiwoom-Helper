@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kiwoom-Helper Example</title>
+</head>
+<body>
+<div>
+    <button id="task">로그인 => 종목 검색 => 차트 등록 => 실시간 종목 등록</button>
+</div>
+<script src="../dist/kiwoom-helper.js"></script>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+// Event attach
+KiwoomHelper.on("receiveTrData", {
+	"opt10001": function(data) {
+		console.log("receiveTrData - search 결과",data);
+		for(var i=0; i<data.size; i++) {
+            console.log(data.rQName,{
+                "종목명" : this.get(data.trCode, i, "종목명"),
+                "시가총액" : this.get(data.trCode, i, "시가총액"),
+                "거래량" : this.get(data.trCode, i, "거래량"),
+                "현재가" : this.get(data.trCode, i, "현재가")
+            });
+        }
+	},
+	"opt10081": function(data) {
+		console.log("receiveTrData - chart 결과", data, this.get(data.trCode));
+	}
+}).on("receiveRealData", function(data) {
+	console.log("**실시간 데이터",data, this.get(data.jongmokCode, data.realType, 10));
+});
+
+$("#task").click(function() {
+	KiwoomHelper.login().then(function() {
+		console.log("로그인 완료");
+	}).then(function() {
+		KiwoomHelper.request("opt10001", {
+			"종목코드" : "035420"
+		});
+		KiwoomHelper.request("opt10081", {
+			"종목코드" : "035420",
+			"기준일자" : "20160404",
+			"수정주가구분 " : 0
+		});
+		KiwoomHelper.register(
+			["039490", "005930"],
+			["9001","10","13"]);
+	}).catch(function(e) {
+		console.log(e, kiwoom.parseErrorCode(e.message));
+	});
+});
+</script>
+</body>
+</html>
