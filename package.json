@@ -4,7 +4,8 @@
   "description": "",
   "main": "src/kiwoom-helper.js",
   "scripts": {
-    "build": "webpack -d --colors"
+    "start": "set NODE_ENV=development&& webpack -d -w --colors",
+    "build": "set NODE_ENV=production&& webpack -p --colors"
   },
   "repository": {
     "type": "git",
