@@ -190,7 +190,7 @@ class KiwoomHelper {
 
 		if(result === 0) {
 			// 화면 번호를 저장
-			this._registerScreens(screenNo);
+			this._registerScreens.push(screenNo);
 		}
 		return result;
 	}

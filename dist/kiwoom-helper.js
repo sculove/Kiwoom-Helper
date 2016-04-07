@@ -288,7 +288,7 @@
 	
 				if (result === 0) {
 					// 화면 번호를 저장
-					this._registerScreens(screenNo);
+					this._registerScreens.push(screenNo);
 				}
 				return result;
 			}
@@ -337,7 +337,7 @@
 							var _kiwoom;
 	
 							// trans 데이터
-							fi; // get(“OPT00001”, 0, “현재가”);
+							// get(“OPT00001”, 0, “현재가”);
 							return (_kiwoom = kiwoom).commGetData.apply(_kiwoom, [arguments[0], ""].concat(Array.prototype.slice.call(arguments)));
 						} else {
 							var _kiwoom2;
