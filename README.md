@@ -4,6 +4,11 @@ QWebview-Plus에서 제공하는 kiwoom 객체와 이벤트를 손쉽게 사용�
 ## Development Environment
  - [QWebview-Plus](https://github.com/sculove/QWebview-plus)
 
+## Install
+```sh
+bower install kiwoom-helper
+```
+
 ## License
-Licensed under MIT:  
+Licensed under MIT:
 https://opensource.org/licenses/MIT
