@@ -1,0 +1,20 @@
+{
+  "name": "Kiwoom-Helper",
+  "description": "supports simple Kiwoom API for QWebview-Plus",
+  "main": "dist/kiwoom-helper.min.js",
+  "authors": [
+    "sculove"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "kiwoom"
+  ],
+  "homepage": "https://github.com/sculove/Kiwoom-Helper",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
