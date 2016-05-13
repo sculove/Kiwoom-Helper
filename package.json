@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.7.4",
+    "bootflat": "^2.0.4",
     "bootstrap": "^3.3.6",
     "jquery": "^2.2.2"
   }
