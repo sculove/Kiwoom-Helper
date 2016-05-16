@@ -1,2 +1,8 @@
-var expect = chai.expect;
-var should = chai.should();
+var expect;
+if(typeof require === "function") {
+	expect = require('chai').expect;
+	require('chai').should();
+} else {
+	expect = chai.expect;
+	chai.should();
+}

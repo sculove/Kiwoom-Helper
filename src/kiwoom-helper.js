@@ -1,5 +1,7 @@
 import "babel-polyfill";
-window.kiwoom = window.kiwoom || {};
+window.kiwoom = window.kiwoom || {
+	getRepeatCnt : () => { return 0; }
+};
 
 // 이벤트의 키를 얻음
 function getEventKey(eventName, trCode) {
@@ -28,12 +30,11 @@ class KiwoomHelper {
 	handleEvent(e) {
 		// console.log(e.type, e);
 		let data = e.detail;
-    	let type = e.type.substring(0, e.type.indexOf(".kiwoom"));
+		let type = e.type.substring(0, e.type.indexOf(".kiwoom"));
+		type === "receiveTrData" && (data.size = kiwoom.getRepeatCnt(data.trCode, data.rQName));
 
-    	type === "receiveTrData" && (data.size = kiwoom.getRepeatCnt(data.trCode, data.rQName));
-
-    	let handler = this._eventHandler[getEventKey(type, data.trCode)];
-    	handler && handler.call(this, data);
+		let handler = this._eventHandler[getEventKey(type, data.trCode)];
+		handler && handler.call(this, data);
 	}
 	/**
 	 * Attach an event handler function.

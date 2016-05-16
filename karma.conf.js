@@ -1,5 +1,7 @@
 // Karma configuration
 // Generated on Fri May 13 2016 14:46:47 GMT+0900 (KST)
+var webpackConfig = require('./webpack.config.js');
+webpackConfig.entry = {};
 
 module.exports = function(config) {
   config.set({
@@ -16,15 +18,21 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
         // dependencies
-        './dist/kiwoom-helper.js',
+        // './dist/kiwoom-helper.js',
+        './node_modules/babel-polyfill/dist/polyfill.js',
         './node_modules/jquery/dist/jquery.min.js',
+
 
         // test dependencies
         './node_modules/chai/chai.js',
         './test/chai.conf.js',
+        './node_modules/sinon/pkg/sinon.js',
+
+        // src
+        './src/*.js',
 
         // tests
-        './test/*.js'
+        './test/*.spec.js'
     ],
 
 
@@ -36,11 +44,18 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        'src/*.js': ['coverage']
+        'src/*.js': ['babel', 'coverage'],
+        'test/*.spec.js': ['babel', 'coverage']
+    },
+    babelPreprocessor: {
+        options: {
+            presets: ['es2015'],
+            plugins: ['transform-es2015-modules-umd']
+        }
     },
     coverageReporter: {
-      type : 'html',
-      dir : 'coverage/'
+        type : 'html',
+        dir : 'coverage/'
     },
 
     // test results reporter to use
@@ -70,7 +85,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'], //, 'Firefox', 'Safari', 'PhantomJS'],
+    browsers: ['PhantomJS'],//, 'Chrome', 'Firefox', 'Safari'],
 
 
     // Continuous Integration mode
@@ -79,8 +94,8 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity
+    concurrency: Infinity,
 
-    // https://gist.github.com/frederickfogerty/f07f389c58ad1fdd28bc
+    webpack: webpackConfig
   });
 };
