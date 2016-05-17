@@ -34,6 +34,7 @@ class KiwoomHelper {
 		type === "receiveTrData" && (data.size = kiwoom.getRepeatCnt(data.trCode, data.rQName));
 
 		let handler = this._eventHandler[getEventKey(type, data.trCode)];
+		// console.log(type,data,handler);
 		handler && handler.call(this, data);
 	}
 	/**
@@ -53,15 +54,11 @@ class KiwoomHelper {
 			"opt10001" : function(data) { // ... },
 			"opt10002" : function(data) { // ... }
 		});
-		// delegate형
-		KiwoomHelper.on("receiveTrData", function(data) { // ... });
 	 */
 	on(eventName, trCode, handler) {
 		if ( KiwoomHelper.EVENTS.indexOf(eventName) === -1) {
 			return;
 		}
-		// delegate형은 제거.
-		delete this._eventHandler[eventName];
 
 		// trCode가 object 인 경우.
 		if (typeof trCode === "object" && typeof handler === "undefined") {
@@ -72,9 +69,6 @@ class KiwoomHelper {
 		// 단건인 경우.
 		} else if (typeof trCode === "string" && typeof handler === "function") {
 			this._eventHandler[getEventKey(eventName, trCode)] = handler;
-		// delegate형
-		} else if (typeof trCode === "function" && typeof handler === "undefined") {
-			this._eventHandler[eventName] = handler;
 		}
 		return this;
 	}

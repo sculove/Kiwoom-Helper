@@ -17,9 +17,10 @@ describe("Event", () => {
 				});
 
 				//Then
-				handler_opt10001.calledOnce.should.equal(true);
+				handler_opt10001.calledOnce.should.be.true;
 				handler_opt10001.args[0][0]["trCode"].should.equal("opt10001");
 				handler_opt10001.args[0][0]["size"].should.be.a("number");
+				Object.keys(KiwoomHelper._eventHandler).should.have.lengthOf(1);
 			});
 
 			it("should call handlers (multi)", () => {
@@ -46,11 +47,15 @@ describe("Event", () => {
 				});
 
 				//Then
+				handler_opt10001.calledOnce.should.be.true;
 				handler_opt10001.args[0][0]["trCode"].should.equal("opt10001");
 				handler_opt10001.args[0][0]["size"].should.be.a("number");
+				handler_opt10081.calledOnce.should.be.true;
 				handler_opt10081.args[0][0]["trCode"].should.equal("opt10081");
 				handler_opt10081.args[0][0]["size"].should.be.a("number");
+				Object.keys(KiwoomHelper._eventHandler).should.have.lengthOf(2);
 			});
+
 			afterEach( () => {
 				KiwoomHelper.off();
 			});

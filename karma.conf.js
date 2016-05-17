@@ -18,10 +18,8 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
         // dependencies
-        // './dist/kiwoom-helper.js',
         './node_modules/babel-polyfill/dist/polyfill.js',
         './node_modules/jquery/dist/jquery.min.js',
-
 
         // test dependencies
         './node_modules/chai/chai.js',
