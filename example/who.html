@@ -2,60 +2,81 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Kiwoom-Helper Example - 수급</title>
 <!-- <link rel="stylesheet" href="../node_modules/bootflat/css/site.min.css"> -->
 <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../node_modules/jquery.json-viewer/json-viewer/jquery.json-viewer.css">
 <script src="../dist/kiwoom-helper.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/jquery.json-viewer/json-viewer/jquery.json-viewer.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<style>
+body { padding-top: 70px; }
+#result {
+  padding:30px;
+}
+</style>
 </head>
 <body>
-
 <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
+  <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-navi" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">종목</a>
+      <a class="navbar-brand" href="#">넌 누구꺼니?</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse">
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">검색</button>
-      </form>
-      <div class="navbar-form navbar-right" role="search">
-        <button type="button" class="btn btn-danger">Login</button>
-      </div>
+    <div class="collapse navbar-collapse" id="menu-navi">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">종목별 분석<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">종목별 투자자 <span class="badge">0796</span></a></li>
+            <li><a href="#">종목별증권사순위요청 <span class="badge">0251</span></a></li>
+            <li><a href="#">종목별 프로그램 매매 <span class="badge">0767</span></a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">신용,공매,대주 <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">종목별 신용매매 동향 <span class="badge">0141</span></a></li>
+            <li><a href="#">종목별 공매도 추이 <span class="badge">0142</span></a></li>
+            <li><a href="#">대차 거래 내역 <span class="badge">1060</span></a></li>
+          </ul>
+        </li>
+      </ul>
+      <!-- <div class="nav navbar-nav navbar-right">
+        <button type="button" class="btn btn-default navbar-btn">Sign in</button>
+      </div> -->
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<div class="jumbotron">
-	<h1>넌 누구꺼니?</h1>
-  	<p>수급과 관련된 데이터를 요청하는 API 예제</p>
-</div>
-<div class="page-header">
-	<h2>종목별 분석</h2>
-</div>
-<h3>종목별 투자자<span class="badge">0796</span></h3>
-<h3>종목별증권사순위요청<span class="badge">0251</span></h3>
-<h3>종목별 프로그램 매매<span class="badge">0767</span></h3>
+<div class="container">
+  <div class="alert alert-danger alert-dismissible fade in" role="alert">
+    <h4><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> 로그인이 되어 있지 않습니다.</h4>
+    <p>로그인 되지 않은 상태에서 정보를 수신할 수 없습니다. 아래 로그인 버튼을 눌러 로그인 해주세요.</p>
+    <p> <button type="button" class="btn btn-danger">Login</button></p>
+  </div>
 
-<div class="page-header">
-	<h2>신용,공매,대주 분석</h2>
+  <div class="page-header">
+    <h2>신용,공매,대주 분석</h2>
+  </div>
+
+  <pre id="result"></pre>
+
 </div>
-<h3>종목별 신용매매 동향<span class="badge">0141</span></h3>
-<h3>종목별 공매도 추이<span class="badge">0142</span></h3>
-<h3>대차 거래 내역<span class="badge">1060</span></h3>
 <script>
-
+$("#result").jsonViewer({
+  a : 1,
+  b : 2
+});
 </script>
 </body>
 </html>
