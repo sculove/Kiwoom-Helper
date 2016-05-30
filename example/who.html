@@ -5,12 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Kiwoom-Helper Example - 수급</title>
 <!-- <link rel="stylesheet" href="../node_modules/bootflat/css/site.min.css"> -->
+<link rel="stylesheet" href="../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
 <link rel="stylesheet" href="../node_modules/jquery.json-viewer/json-viewer/jquery.json-viewer.css">
 <script src="../dist/kiwoom-helper.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../node_modules/jquery.json-viewer/json-viewer/jquery.json-viewer.js"></script>
+<script src="../node_modules/block-ui/jquery.blockUI.js"></script>
+<script src="../node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.kr.min.js"></script>
+<script src="../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script>
+// $.fn.datepicker.defaults.language = "en";
+$.fn.datepicker.defaults.format = "yyyy.mm.dd";
+$.fn.datepicker.defaults.todayBtn = true;
+
+</script>
 <style>
 body { padding-top: 70px; }
 #result {
@@ -64,9 +75,70 @@ body { padding-top: 70px; }
 </div>
 <div class="_content container">
   <div class="page-header">
-      <h2 class="_title">신용,공매,대주 분석</h2>
+      <h2 class="_title"></h2>
   </div>
-
+  <div>
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">종목코드</label>
+        <div class="col-sm-10">
+          <input type="input" class="form-control" placeholder="종목코드 (6자리)">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">일자</label>
+        <div class="col-sm-10">
+          <div class="input-group date"
+          data-provide="datepicker"
+          data-date-format="yyyy.mm.dd"
+          >
+            <input type="text" class="form-control" placeholder="yyyy.mm.dd"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">금액수량 구분</label>
+        <div class="col-sm-10">
+          <label class="radio-inline">
+            <input type="radio" name="gubun1" value="1" checked> 금액
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="gubun1" value="2"> 수량
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">매매구분 구분</label>
+        <div class="col-sm-10">
+          <label class="radio-inline">
+            <input type="radio" name="gubun2" value="0" checked> 순매수
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="gubun2" value="1"> 매수
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="gubun2" value="2"> 매도
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">단위 구분</label>
+        <div class="col-sm-10">
+          <label class="radio-inline">
+            <input type="radio" name="gubun3" value="1000" checked> 천주(1,000)
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="gubun3" value="1"> 단주(1)
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-default">조회</button>
+        </div>
+      </div>
+    </form>
+  </div>
   <pre id="result"></pre>
 
 </div>
@@ -91,17 +163,35 @@ $(function() {
   }
 
   function login() {
+    $.blockUI({
+      message: "<h4>Login...</h4>",
+      css: {
+        border: 'none',
+        padding: '15px',
+        backgroundColor: '#000',
+        '-webkit-border-radius': '10px',
+        '-moz-border-radius': '10px',
+        opacity: .5,
+        color: '#fff'
+      },
+      baseZ : 2000
+    });
     KiwoomHelper.login().then(function(err) {
       $notice.hide();
       $content.show();
+      $.unblockUI();
+      isLogin = true;
     }).catch(function() {
       $notice.show();
       $content.hide();
+      $.unblockUI();
+      isLogin = false;
     });
   }
 
   $menu.on("click", "a[code]", function(e) {
     !isLogin && login();
+
     var $el = $(this);
     $title.html($el.html());
   })
