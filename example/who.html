@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Kiwoom-Helper Example - 수급</title>
-<!-- <link rel="stylesheet" href="../node_modules/bootflat/css/site.min.css"> -->
+<title>Example</title>
 <link rel="stylesheet" href="../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-
 <link rel="stylesheet" href="../node_modules/jquery.json-viewer/json-viewer/jquery.json-viewer.css">
+<link rel="stylesheet" href="../node_modules/jquery-typeahead/dist/jquery.typeahead.min.css">
+
 <script src="../dist/kiwoom-helper.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-<script src="../node_modules/jquery.json-viewer/json-viewer/jquery.json-viewer.js"></script>
 <script src="../node_modules/block-ui/jquery.blockUI.js"></script>
-<script src="../node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.kr.min.js"></script>
+<script src="../node_modules/jquery.json-viewer/json-viewer/jquery.json-viewer.js"></script>
+<script src="../node_modules/jquery-typeahead/dist/jquery.typeahead.min.js"></script>
 <script src="../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="../node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.kr.min.js"></script>
 <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script>
-// $.fn.datepicker.defaults.language = "en";
+$.fn.datepicker.defaults.language = "kr";
 $.fn.datepicker.defaults.format = "yyyy.mm.dd";
 $.fn.datepicker.defaults.todayBtn = true;
-
 </script>
 <style>
 body { padding-top: 70px; }
@@ -34,17 +34,17 @@ body { padding-top: 70px; }
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-navi" aria-expanded="false">
+      <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-navi" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">넌 누구꺼니?</a>
+      </button> -->
+      <a class="navbar-brand" href="#">기본 예제</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="menu-navi">
+    <!-- <div class="collapse navbar-collapse" id="menu-navi">
       <ul id="menu" class="nav navbar-nav">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">종목별 분석<span class="caret"></span></a>
@@ -63,7 +63,7 @@ body { padding-top: 70px; }
           </ul>
         </li>
       </ul>
-    </div><!-- /.navbar-collapse -->
+    </div> --><!-- /.navbar-collapse
   </div><!-- /.container-fluid -->
 </nav>
 <div class="_notice container">
@@ -75,14 +75,21 @@ body { padding-top: 70px; }
 </div>
 <div class="_content container">
   <div class="page-header">
-      <h2 class="_title"></h2>
+      <h3>종목별 투자자 <span class="badge">0796</span></h3>
   </div>
   <div>
     <form class="form-horizontal">
-      <div class="form-group">
+      <div class="form-group typeahead__container">
         <label for="inputEmail3" class="col-sm-2 control-label">종목코드</label>
-        <div class="col-sm-10">
-          <input type="input" class="form-control" placeholder="종목코드 (6자리)">
+        <div class="col-sm-10 typeahead__field">
+          <span class="typeahead__query">
+            <input type="search" autocomplete="off" class="form-control _code" placeholder="종목코드 (6자리)">
+          </span>
+          <span class="typeahead__button">
+              <button type="submit">
+                  <i class="typeahead__search-icon"></i>
+              </button>
+          </span>
         </div>
       </div>
       <div class="form-group">
@@ -90,7 +97,6 @@ body { padding-top: 70px; }
         <div class="col-sm-10">
           <div class="input-group date"
           data-provide="datepicker"
-          data-date-format="yyyy.mm.dd"
           >
             <input type="text" class="form-control" placeholder="yyyy.mm.dd"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
           </div>
@@ -143,24 +149,53 @@ body { padding-top: 70px; }
 
 </div>
 <script>
-var isLogin = kiwoom.getConnectState() === 1;
+// var isLogin = kiwoom.getConnectState() === 1;
 
 $(function() {
-  var $menu = $("#menu");
+//   var $notice = $("._notice");
+//   $notice.find(".btn:first-child").click(login);
 
-  var $notice = $("._notice");
-  $notice.find(".btn:first-child").click(login);
+//   var $content = $("._content");
 
-  var $content = $("._content");
-  var $title = $content.find("._title:first-child");
-
-  if(isLogin) {
-    $notice.hide();
-    $content.show();
-  } else {
-    $notice.show();
-    $content.hide();
-  }
+//   if(isLogin) {
+//     $notice.hide();
+//     $content.show();
+//   } else {
+//     $notice.show();
+//     $content.hide();
+//   }
+  $("._code").typeahead({
+    order: "asc",
+    source: {
+      data: [
+            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda",
+            "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh",
+            "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia",
+            "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burma",
+            "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad",
+            "Chile", "China", "Colombia", "Comoros", "Congo, Democratic Republic", "Congo, Republic of the",
+            "Costa Rica", "Cote d'Ivoire", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti",
+            "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador",
+            "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon",
+            "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Greenland", "Grenada", "Guatemala", "Guinea",
+            "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India",
+            "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan",
+            "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kuwait", "Kyrgyzstan", "Laos",
+            "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg",
+            "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands",
+            "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Mongolia", "Morocco", "Monaco",
+            "Mozambique", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger",
+            "Nigeria", "Norway", "Oman", "Pakistan", "Panama", "Papua New Guinea", "Paraguay", "Peru",
+            "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Samoa", "San Marino",
+            "Sao Tome", "Saudi Arabia", "Senegal", "Serbia and Montenegro", "Seychelles", "Sierra Leone",
+            "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "Spain",
+            "Sri Lanka", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan",
+            "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey",
+            "Turkmenistan", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States",
+            "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+        ]
+    }
+  })
 
   function login() {
     $.blockUI({
@@ -188,14 +223,6 @@ $(function() {
       isLogin = false;
     });
   }
-
-  $menu.on("click", "a[code]", function(e) {
-    !isLogin && login();
-
-    var $el = $(this);
-    $title.html($el.html());
-  })
-
 });
 
 $("#result").jsonViewer({
