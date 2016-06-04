@@ -1,7 +1,7 @@
 {
   "name": "Kiwoom-Helper",
   "version": "1.0.0",
-  "description": "",
+  "description": "QWebview-Plus에서 제공하는 kiwoom 객체와 이벤트를 손쉽게 사용할 수 있는 유틸",
   "main": "src/kiwoom-helper.js",
   "scripts": {
     "start": "set NODE_ENV=development && export NODE_ENV=development && webpack -d -w --colors",
@@ -17,6 +17,9 @@
   "bugs": {
     "url": "https://github.com/sculove/Kiwoom-Helper/issues"
   },
+  "keywords" : [
+  	"kiwoom", "stock", "QWebview"
+  ],
   "homepage": "https://github.com/sculove/Kiwoom-Helper",
   "devDependencies": {
     "babel-core": "^6.6.4",
