@@ -6,7 +6,7 @@ QWebview-Plus에서 제공하는 kiwoom 객체와 이벤트를 손쉽게 사용�
 
 ## Install
 ```sh
-bower install kiwoom-helper
+bower install Kiwoom-Helper
 npm install Kiwoom-Helper
 ```
 
