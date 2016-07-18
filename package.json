@@ -1,6 +1,6 @@
 {
   "name": "Kiwoom-Helper",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "QWebview-Plus에서 제공하는 kiwoom 객체와 이벤트를 손쉽게 사용할 수 있는 유틸",
   "main": "dist/kiwoom-helper.js",
   "scripts": {
