@@ -1,8 +1,3 @@
-import "babel-polyfill";
-window.kiwoom = window.kiwoom || {
-	getRepeatCnt : () => { return 0; }
-};
-
 // 이벤트의 키를 얻음
 function getEventKey(eventName, trCode) {
 	return eventName + "_" + trCode;
@@ -31,7 +26,9 @@ class KiwoomHelper {
 		// console.log(e.type, e);
 		let data = e.detail;
 		let type = e.type.substring(0, e.type.indexOf(".kiwoom"));
-		type === "receiveTrData" && (data.size = kiwoom.getRepeatCnt(data.trCode, data.rQName));
+		if (type === "receiveTrData") {
+			data.size = kiwoom ? kiwoom.getRepeatCnt(data.trCode, data.rQName) : 0;
+		}
 
 		let handler = this._eventHandler[getEventKey(type, data.trCode)];
 		// console.log(type,data,handler);
@@ -102,6 +99,16 @@ class KiwoomHelper {
 				});
 		}
 		return this;
+	}
+	/**
+	 * isLogin
+	 * @method KiwoomHelper#isLogin
+	 * @return {Number} login status
+	 * @example
+		KiwoomHelper.isLogin();
+	 */
+	isLogin() {
+		return kiwoom.getConnectState();
 	}
 	/**
 	 * login

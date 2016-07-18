@@ -1,8 +1,8 @@
 {
   "name": "Kiwoom-Helper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "QWebview-Plus에서 제공하는 kiwoom 객체와 이벤트를 손쉽게 사용할 수 있는 유틸",
-  "main": "src/kiwoom-helper.js",
+  "main": "dist/kiwoom-helper.js",
   "scripts": {
     "start": "set NODE_ENV=development && export NODE_ENV=development && webpack -d -w --colors",
     "build": "set NODE_ENV=production && export NODE_ENV=production && webpack -p --colors",
@@ -17,8 +17,10 @@
   "bugs": {
     "url": "https://github.com/sculove/Kiwoom-Helper/issues"
   },
-  "keywords" : [
-  	"kiwoom", "stock", "QWebview"
+  "keywords": [
+    "kiwoom",
+    "stock",
+    "QWebview"
   ],
   "homepage": "https://github.com/sculove/Kiwoom-Helper",
   "devDependencies": {
@@ -41,7 +43,11 @@
     "karma-webpack": "^1.7.0",
     "mocha": "^2.4.5",
     "phantomjs-prebuilt": "^2.1.7",
-    "sinon": "^1.17.4",
-    "webpack": "^1.12.14"
+    "sinon": "^1.17.4"
+  },
+  "dependencies": {
+    "es6-promise": "^3.2.1",
+    "jquery": "^3.1.0",
+    "webpack": "^1.13.1"
   }
 }

@@ -1,6 +1,10 @@
 describe("Event", () => {
 	"use strict";
-
+	beforeEach( () => {
+		window.kiwoom = window.kiwoom || {
+			getRepeatCnt : () => { return 0; }
+		};
+	});
 	describe("on", () => {
 		context("sync events", () => {
 			it("should call handler (single)", () => {
