@@ -18,7 +18,7 @@ var config = {
 				exclude: /node_modules/,
 				query: {
 					presets: [
-						"es2015"
+						"es2015-loose"
 					]
 				}
 			}

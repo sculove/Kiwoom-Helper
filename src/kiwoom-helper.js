@@ -1,3 +1,5 @@
+import { Promise } from "es6-promise";
+
 // 이벤트의 키를 얻음
 function getEventKey(eventName, trCode) {
 	return eventName + "_" + trCode;
