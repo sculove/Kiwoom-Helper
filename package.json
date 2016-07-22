@@ -5,7 +5,7 @@
   "main": "dist/kiwoom-helper.js",
   "scripts": {
     "start": "set NODE_ENV=development && export NODE_ENV=development && webpack -d -w --colors",
-    "build": "set NODE_ENV=production && webpack -p --colors",
+    "build": "set NODE_ENV=production && export NODE_ENV=production && webpack -p --colors",
     "test": "./node_modules/.bin/karma start"
   },
   "repository": {
