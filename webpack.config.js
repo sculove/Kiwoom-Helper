@@ -9,7 +9,7 @@ var config = {
 		filename : NODE_ENV === "production" ? "kiwoom-helper.min.js" : "kiwoom-helper.js",
 		path: __dirname + "/dist"
 	},
-	devtool: NODE_ENV === "production" ? "source-map" : "inline-source-map",
+	// devtool: NODE_ENV === "production" ? "source-map" : "inline-source-map",
 	module: {
 		loaders: [
 			{

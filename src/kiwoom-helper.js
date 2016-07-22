@@ -14,6 +14,9 @@ class KiwoomHelper {
 		this._registerScreens = [];
 		this._attach();
 	}
+	isQWebviewPlus() {
+		return "kiwoom" in window;
+	}
 	_attach() {
 		// 사용자 구분 요청 명은 trCode와 동일하다.
 		KiwoomHelper.EVENTS.forEach(v => {
@@ -55,6 +58,9 @@ class KiwoomHelper {
 		});
 	 */
 	on(eventName, trCode, handler) {
+		if ( !this.isQWebviewPlus() ) {
+			return this;
+		}
 		if ( KiwoomHelper.EVENTS.indexOf(eventName) === -1) {
 			return;
 		}
@@ -84,6 +90,9 @@ class KiwoomHelper {
 		KiwoomHelper.off("receiveTrData.kiwoom", ["opt10001", "opt10002"] );
 	 */
 	off(eventName, trCode) {
+		if ( !this.isQWebviewPlus() ) {
+			return this;
+		}
 		// All event detach.
 		if (arguments.length === 0) {
 			this._eventHandler = {};
@@ -110,6 +119,9 @@ class KiwoomHelper {
 		KiwoomHelper.isLogin();
 	 */
 	isLogin() {
+		if ( !this.isQWebviewPlus() ) {
+			return false;
+		}
 		return kiwoom.getConnectState();
 	}
 	/**
@@ -122,6 +134,9 @@ class KiwoomHelper {
 		});
 	 */
 	login() {
+		if ( !this.isQWebviewPlus() ) {
+			return Promise.reject();
+		}
 		return new Promise((resolve, reject) => {
 			const status = kiwoom.getConnectState();
 		    if(status == 0) {
@@ -147,6 +162,9 @@ class KiwoomHelper {
 		KiwoomHelper.getLoginInfo();
 	 */
 	getLoginInfo() {
+		if ( !this.isQWebviewPlus() ) {
+			return {};
+		}
 		return {
 			account : kiwoom.getLoginInfo("ACCNO").replace(/;$/,"").split(";"),
 			user : {
@@ -168,6 +186,9 @@ class KiwoomHelper {
 		});
 	 */
 	request(trCode, input, isContinue = false) {
+		if ( !this.isQWebviewPlus() ) {
+			return -1;
+		}
 		//@todo screenNo 200개가 넘으면 안된다.
 		//실시간 조건검색은 최대 10개
 		Object.keys(input).forEach(v => {
@@ -183,6 +204,9 @@ class KiwoomHelper {
 		return screenNo;
 	}
 	register(stockcodes, fids, isNew = true) {
+		if ( !this.isQWebviewPlus() ) {
+			return -1;
+		}
 		if(!Array.isArray(stockcodes)) {
 			stockcodes = [stockcodes];
 		}
@@ -208,6 +232,9 @@ class KiwoomHelper {
 		KiwoomHelper.disconnect("SRC2", ""035420");
 	 */
 	disconnect(screenNo, stockcode = "ALL") {
+		if ( !this.isQWebviewPlus() ) {
+			return;
+		}
 		if(screenNo) {
 			if(this._requestScreens.indexOf(screenNo) !== -1) {
 				kiwwom.DisconnectRealData(screenNo);
@@ -224,6 +251,9 @@ class KiwoomHelper {
 		}
 	}
 	get() {
+		if ( !this.isQWebviewPlus() ) {
+			return null;
+		}
 		switch(arguments.length) {
 			case 1:
 				// 대용량 데이터 (trCode만 입력)

@@ -74,6 +74,10 @@
 			this._attach();
 		}
 	
+		KiwoomHelper.prototype.isQWebviewPlus = function isQWebviewPlus() {
+			return "kiwoom" in window;
+		};
+	
 		KiwoomHelper.prototype._attach = function _attach() {
 			var _this = this;
 	
@@ -124,6 +128,9 @@
 		KiwoomHelper.prototype.on = function on(eventName, trCode, handler) {
 			var _this2 = this;
 	
+			if (!this.isQWebviewPlus()) {
+				return this;
+			}
 			if (KiwoomHelper.EVENTS.indexOf(eventName) === -1) {
 				return;
 			}
@@ -157,6 +164,9 @@
 		KiwoomHelper.prototype.off = function off(eventName, trCode) {
 			var _this3 = this;
 	
+			if (!this.isQWebviewPlus()) {
+				return this;
+			}
 			// All event detach.
 			if (arguments.length === 0) {
 				this._eventHandler = {};
@@ -185,6 +195,9 @@
 	
 	
 		KiwoomHelper.prototype.isLogin = function isLogin() {
+			if (!this.isQWebviewPlus()) {
+				return false;
+			}
 			return kiwoom.getConnectState();
 		};
 		/**
@@ -199,6 +212,9 @@
 	
 	
 		KiwoomHelper.prototype.login = function login() {
+			if (!this.isQWebviewPlus()) {
+				return Promise.reject();
+			}
 			return new Promise(function (resolve, reject) {
 				var status = kiwoom.getConnectState();
 				if (status == 0) {
@@ -225,6 +241,9 @@
 	
 	
 		KiwoomHelper.prototype.getLoginInfo = function getLoginInfo() {
+			if (!this.isQWebviewPlus()) {
+				return {};
+			}
 			return {
 				account: kiwoom.getLoginInfo("ACCNO").replace(/;$/, "").split(";"),
 				user: {
@@ -250,6 +269,9 @@
 		KiwoomHelper.prototype.request = function request(trCode, input) {
 			var isContinue = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
 	
+			if (!this.isQWebviewPlus()) {
+				return -1;
+			}
 			//@todo screenNo 200개가 넘으면 안된다.
 			//실시간 조건검색은 최대 10개
 			Object.keys(input).forEach(function (v) {
@@ -268,6 +290,9 @@
 		KiwoomHelper.prototype.register = function register(stockcodes, fids) {
 			var isNew = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
 	
+			if (!this.isQWebviewPlus()) {
+				return -1;
+			}
 			if (!Array.isArray(stockcodes)) {
 				stockcodes = [stockcodes];
 			}
@@ -297,6 +322,9 @@
 		KiwoomHelper.prototype.disconnect = function disconnect(screenNo) {
 			var stockcode = arguments.length <= 1 || arguments[1] === undefined ? "ALL" : arguments[1];
 	
+			if (!this.isQWebviewPlus()) {
+				return;
+			}
 			if (screenNo) {
 				if (this._requestScreens.indexOf(screenNo) !== -1) {
 					kiwwom.DisconnectRealData(screenNo);
@@ -314,6 +342,9 @@
 		};
 	
 		KiwoomHelper.prototype.get = function get() {
+			if (!this.isQWebviewPlus()) {
+				return null;
+			}
 			switch (arguments.length) {
 				case 1:
 					// 대용량 데이터 (trCode만 입력)
